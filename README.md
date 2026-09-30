@@ -19,7 +19,7 @@ Sabores sem foto ganham um desenho automático. Para usar uma foto, coloque o ar
 ## Publicar (GitHub Pages)
 
 Settings → Pages → *Deploy from a branch* → escolher a branch e a pasta `/ (root)`.
-Endereço: `https://briandevbr.github.io/Pizzaria3Irm-os/`
+Endereço: `https://briandevbr.github.io/Pizzaria3Irmaos/`
 
 ## A confirmar com a pizzaria
 
