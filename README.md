@@ -18,8 +18,11 @@ Sabores sem foto ganham um desenho automático. Para usar uma foto, coloque o ar
 
 ## Publicar (GitHub Pages)
 
-Settings → Pages → *Deploy from a branch* → escolher a branch e a pasta `/ (root)`.
-Endereço: `https://briandevbr.github.io/Pizzaria3Irmaos/`
+1. No plano grátis do GitHub, o repositório precisa ser **público** (Settings → General → Danger Zone → Change visibility).
+2. Settings → Pages → *Deploy from a branch* → branch `main`, pasta `/ (root)` → Save.
+3. Em 1–2 minutos o site fica em `https://briandevbr.github.io/Pizzaria3Irmaos/`
+
+Cada commit na `main` atualiza o site sozinho.
 
 ## A confirmar com a pizzaria
 

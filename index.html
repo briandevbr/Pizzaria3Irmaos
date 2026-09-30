@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Pizzaria Três Irmãos | Pizza em Olinda com entrega e retirada</title>
+  <title>Pizzaria Três Irmãos | Pizza em Olinda com entrega</title>
   <meta name="description" content="Pizzaria Três Irmãos em Olinda-PE: massa artesanal, pizzas a partir de R$ 27,90, meio a meio e borda recheada. Monte seu pedido e envie direto pelo WhatsApp.">
   <meta name="theme-color" content="#111111">
   <link rel="canonical" href="https://briandevbr.github.io/Pizzaria3Irmaos/">
@@ -17,10 +17,13 @@
   <meta property="og:image" content="https://briandevbr.github.io/Pizzaria3Irmaos/img/compartilhar.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pizza meio calabresa e meio frango com catupiry da Pizzaria Três Irmãos">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="apple-touch-icon" href="img/icone-app.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Três Irmãos">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -223,7 +226,7 @@
   </footer>
 
   <!-- BARRA DO CARRINHO -->
-  <button class="barra-pedido" id="barra-pedido" type="button" aria-controls="painel-pedido" tabindex="-1" aria-hidden="true">
+  <button class="barra-pedido" id="barra-pedido" type="button" aria-controls="painel-pedido" inert>
     <span class="barra-sacola" aria-hidden="true">
       <svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8Z" fill="#FFC61A" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
       <b id="barra-qtd">0</b>
@@ -233,7 +236,7 @@
   </button>
 
   <!-- PAINEL: MONTAR PIZZA -->
-  <div class="painel" id="painel-pizza" role="dialog" aria-modal="true" aria-labelledby="pizza-titulo" aria-hidden="true">
+  <div class="painel" id="painel-pizza" role="dialog" aria-modal="true" aria-labelledby="pizza-titulo" inert>
     <div class="painel-fundo" data-fechar></div>
     <div class="folha">
       <div class="folha-topo">
@@ -255,7 +258,7 @@
   </div>
 
   <!-- PAINEL: SEU PEDIDO -->
-  <div class="painel" id="painel-pedido" role="dialog" aria-modal="true" aria-labelledby="pedido-titulo" aria-hidden="true">
+  <div class="painel" id="painel-pedido" role="dialog" aria-modal="true" aria-labelledby="pedido-titulo" inert>
     <div class="painel-fundo" data-fechar></div>
     <div class="folha">
       <div class="folha-topo">

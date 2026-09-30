@@ -1,0 +1,24 @@
+# Lixo do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Ferramentas (caso algum dia use npm) e logs
+node_modules/
+*.log
+
+# Arquivos soltos que não fazem parte do site
+*.zip
+*.rar
+.env
+.env.*
+
+# Anotações privadas do projeto: o repositório vai ficar público
+CLAUDE.md
+CLAUDE.local.md

@@ -14,7 +14,7 @@
   function $$(sel, el) { return Array.prototype.slice.call((el || document).querySelectorAll(sel)); }
   function centavos(v) { return Math.round(Number(v) * 100); }
   var formato = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
-  function brl(c) { return formato.format(c / 100).replace(/\s/g, ' '); }
+  function brl(c) { return formato.format(c / 100).replace(/\s/g, '\u00a0'); } // espaço que não quebra linha
   function brlTexto(c) { return formato.format(c / 100).replace(/\s/g, ' '); }
   function esc(t) {
     return String(t).replace(/[&<>"']/g, function (ch) {
@@ -25,6 +25,7 @@
   function lerDinheiro(t) { // "150", "150,00", "R$ 1.000,50"
     var s = String(t || '').replace(/[^\d,.]/g, '');
     if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
     var v = parseFloat(s);
     return isFinite(v) ? Math.round(v * 100) : NaN;
   }
@@ -301,8 +302,7 @@
     $('#barra-qtd').textContent = q;
     $('#barra-total').textContent = brl(subtotal());
     barra.classList.toggle('visivel', visivel);
-    barra.setAttribute('aria-hidden', visivel ? 'false' : 'true');
-    barra.tabIndex = visivel ? 0 : -1;
+    barra.inert = !visivel;
     barra.setAttribute('aria-label', 'Ver meu pedido: ' + q + (q === 1 ? ' item' : ' itens') + ', ' + brlTexto(subtotal()));
     document.body.classList.toggle('tem-itens', visivel);
   }
@@ -354,7 +354,7 @@
     if (painelAberto) fecharDireto();
     focoAntes = origem || document.activeElement;
     painel.classList.add('aberto');
-    painel.setAttribute('aria-hidden', 'false');
+    painel.inert = false;
     document.documentElement.classList.add('travado');
     painelAberto = painel;
     $('.folha-corpo', painel).scrollTop = 0;
@@ -376,7 +376,7 @@
     var painel = painelAberto;
     if (!painel) return;
     painel.classList.remove('aberto');
-    painel.setAttribute('aria-hidden', 'true');
+    painel.inert = true;
     document.documentElement.classList.remove('travado');
     painelAberto = null;
     if (painel.id === 'painel-pedido') enviado = false;
@@ -440,7 +440,7 @@
     C.categorias.forEach(function (cat) {
       var doGrupo = outras.filter(function (p) { return p.categoria === cat.id; });
       if (!doGrupo.length) return;
-      lista += '<h5>' + esc(cat.nome) + '</h5>';
+      lista += '<h4>' + esc(cat.nome) + '</h4>';
       doGrupo.forEach(function (p) {
         lista += '<label class="opcao"><input type="radio" name="metade" value="' + p.id + '">' +
           '<span><span class="mini">' + visualPizza(p.id) + '</span>' + esc(p.nome) +
@@ -519,6 +519,7 @@
     var desenho = monta.meio ? D.pizza(monta.a, monta.b) : visualPizza(monta.a);
     var item = { tipo: 'pizza', sabores: monta.meio ? [monta.a, monta.b] : [monta.a], borda: monta.borda || '', qtd: monta.qtd };
     var texto = (item.qtd > 1 ? item.qtd + 'x ' : '') + (monta.meio ? 'Meio a meio' : PIZZAS[monta.a].nome) + ' no pedido!';
+    monta = null; // evita adicionar de novo num toque duplo
     adicionarItem(item);
     fecharPainel();
     voar(rect, desenho);
@@ -902,8 +903,8 @@
     if (card) { abrirMontagem(card.getAttribute('data-pizza'), card); return; }
     var tam = e.target.closest('[data-bebida]');
     if (tam) {
-      var b = BEBIDAS[tam.getAttribute('data-bebida')], t = tamanhoDe(b, tam.getAttribute('data-tamanho'));
-      if (!b || !t) return;
+      var b = BEBIDAS[tam.getAttribute('data-bebida')], t = b && tamanhoDe(b, tam.getAttribute('data-tamanho'));
+      if (!t) return;
       var cardB = tam.closest('.card-bebida'), img = cardB ? $('.card-img', cardB) : null;
       adicionarItem({ tipo: 'bebida', bebida: b.id, tamanho: t.id, qtd: 1 });
       voar(img ? img.getBoundingClientRect() : null, D.bebida(b.id, t.nome));
