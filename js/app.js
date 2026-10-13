@@ -53,9 +53,16 @@
   }
   function visualPizza(a, b) {
     var p = PIZZAS[a];
-    if (!b && p.foto) return '<img src="' + esc(p.foto) + '" alt="Foto da pizza ' + esc(p.nome) + '" loading="lazy" width="320" height="320">';
+    if (!b && p.foto) return '<img src="' + esc(p.foto) + '" alt="Foto da pizza ' + esc(p.nome) + '" data-sabor="' + esc(a) + '" loading="lazy" width="320" height="320">';
     return D.pizza(a, b);
   }
+  // foto que não carregou (arquivo apagado, nome errado...) vira o desenho do sabor na hora
+  document.addEventListener('error', function (e) {
+    var img = e.target, id = img.getAttribute && img.getAttribute('data-sabor');
+    if (!id || !PIZZAS[id] || !img.parentNode) return;
+    delete PIZZAS[id].foto; // daqui pra frente o sabor usa o desenho em todo o site
+    img.outerHTML = D.pizza(id);
+  }, true);
 
   // ---------- estado do pedido (fica salvo no aparelho) ----------
   var CHAVE = 'tresirmaos:pedido:v1';

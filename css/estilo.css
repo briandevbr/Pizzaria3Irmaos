@@ -266,6 +266,8 @@ button.card:active { transform: scale(.97); }
 .card-img { width: 86%; max-width: 170px; aspect-ratio: 1; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .55)); transition: transform .6s cubic-bezier(.2, .9, .2, 1); }
 .card-img svg, .card-img img { width: 100%; height: 100%; }
 .card-img img { width: calc(100% - 10px); height: calc(100% - 10px); margin: 5px; border-radius: 50%; object-fit: cover; border: 3px solid #000; box-shadow: 0 0 0 5px #fff; }
+/* enquanto a foto carrega, o círculo já aparece na cor da massa (nunca fica um buraco no card) */
+.card-img img, .monta-visual img, .lista-sabores .mini img, .item-img img, .voador img { background: radial-gradient(circle, #FFD466 0 66%, #EFAE57 67%); }
 button.card:hover .card-img { transform: rotate(28deg) scale(1.04); }
 .card-nome { font-family: var(--fonte-titulo); font-size: 1.1rem; line-height: 1.12; margin: 10px 0 10px; min-height: 2.24em; display: flex; align-items: center; justify-content: center; }
 .card-rodape { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 0 2px; margin-top: auto; }
