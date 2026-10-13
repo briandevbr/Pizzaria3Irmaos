@@ -234,8 +234,17 @@
     'mms': function (r) { return base('chocolate', r) + camada('confeito', 24, 13, r, 1.15); }
   };
 
+  // sabor novo que ainda não tem receita: pizza de queijo neutra, sem ingrediente que ele talvez não leve
+  function generica(r) { return base('queijo', r) + camada('bolhaQueijo', 30, 10, r) + oregano(r); }
+  var avisados = {};
+
   function recheio(id) {
-    var receita = RECEITAS[id] || RECEITAS.mussarela;
+    var receita = RECEITAS[id];
+    if (!receita) {
+      receita = generica;
+      if (!avisados[id] && window.console) console.warn('Sabor "' + id + '" sem receita em desenhos.js: usando o desenho genérico.');
+      avisados[id] = true;
+    }
     return receita(sorteio(semente(id)));
   }
 
